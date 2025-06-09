@@ -84,34 +84,6 @@ function App() {
     return scrollToSection;
   };
 
-  // Auto-scroll carousel hook
-  const useAutoScroll = (interval = 3000) => {
-    const [ref, inView] = useInView({
-      threshold: 0,
-      triggerOnce: false,
-    });
-    const carouselRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-      if (!inView) return;
-
-      const scrollInterval = setInterval(() => {
-        if (carouselRef.current) {
-          const nextButton = carouselRef.current.querySelector(
-            '[data-orientation="next"]'
-          ) as HTMLButtonElement;
-          if (nextButton) {
-            nextButton.click();
-          }
-        }
-      }, interval);
-
-      return () => clearInterval(scrollInterval);
-    }, [inView, interval]);
-
-    return { ref, carouselRef };
-  };
-
   const scrollToSection = useSmoothScroll();
 
   const structureImages = [

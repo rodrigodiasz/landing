@@ -123,7 +123,7 @@ function App() {
 
   const heroImages = [
     {
-      url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070",
+      url: "https://images.unsplash.com/photo-1591258370814-01609b341790?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Pilates",
       description: "Transforme seu corpo e mente",
     },
@@ -302,10 +302,10 @@ function App() {
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center">
-                <span className="text-white text-xl font-bold">E</span>
+                <Heart className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-emerald-600">
-                Evolution
+                Lovable
               </span>
             </div>
             <nav className="hidden md:flex items-center gap-8">
@@ -904,11 +904,9 @@ function App() {
               <div>
                 <div className="flex items-center gap-2 mb-6">
                   <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                    <span className="text-emerald-600 text-xl font-bold">
-                      E
-                    </span>
+                    <Heart className="w-6 h-6 text-emerald-600" />
                   </div>
-                  <span className="text-2xl font-bold">Evolution</span>
+                  <span className="text-2xl font-bold">Lovable</span>
                 </div>
                 <p className="text-emerald-100 mb-6">
                   Transformando vidas através da fisioterapia e pilates.
@@ -985,7 +983,7 @@ function App() {
             </div>
             <Separator className="my-8 bg-white/10" />
             <div className="text-center text-emerald-100">
-              <p>© 2024 Evolution. Todos os direitos reservados.</p>
+              <p>© 2024 Lovable. Todos os direitos reservados.</p>
             </div>
           </div>
         </footer>

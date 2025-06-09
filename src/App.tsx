@@ -112,7 +112,6 @@ function App() {
     return { ref, carouselRef };
   };
 
-  const { ref: carouselContainerRef } = useAutoScroll(4000);
   const scrollToSection = useSmoothScroll();
 
   const structureImages = [
@@ -169,10 +168,7 @@ function App() {
     },
   ];
 
-  const {
-    currentIndex: currentHeroIndex,
-    setCurrentIndex: setCurrentHeroIndex,
-  } = useHeroCarousel(heroImages, 3000);
+  const { currentIndex: currentHeroIndex } = useHeroCarousel(heroImages, 3000);
 
   const professionals = [
     {

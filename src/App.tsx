@@ -55,35 +55,63 @@ const useHeroCarousel = (images: any[], interval = 5000) => {
   return { currentIndex, setCurrentIndex };
 };
 
+// Auto-scroll carousel hook
+const useAutoScroll = (interval = 3000) => {
+  const [ref, inView] = useInView({
+    threshold: 0,
+    triggerOnce: false,
+  });
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!inView) return;
+
+    const scrollInterval = setInterval(() => {
+      if (carouselRef.current) {
+        const nextButton = carouselRef.current.querySelector(
+          '[data-orientation="next"]'
+        ) as HTMLButtonElement;
+        if (nextButton) {
+          nextButton.click();
+        }
+      }
+    }, interval);
+
+    return () => clearInterval(scrollInterval);
+  }, [inView, interval]);
+
+  return { ref, carouselRef };
+};
+
+// Smooth scroll hook
+const useSmoothScroll = () => {
+  const scrollToSection = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      const href = e.currentTarget.getAttribute("href");
+      if (!href) return;
+
+      const targetId = href.replace("#", "");
+      const targetElement = document.getElementById(targetId);
+      if (!targetElement) return;
+
+      const headerOffset = 80; // altura do header
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    },
+    []
+  );
+
+  return scrollToSection;
+};
+
 function App() {
-  // Smooth scroll hook
-  const useSmoothScroll = () => {
-    const scrollToSection = useCallback(
-      (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        const href = e.currentTarget.getAttribute("href");
-        if (!href) return;
-
-        const targetId = href.replace("#", "");
-        const targetElement = document.getElementById(targetId);
-        if (!targetElement) return;
-
-        const headerOffset = 80; // altura do header
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      },
-      []
-    );
-
-    return scrollToSection;
-  };
-
   const scrollToSection = useSmoothScroll();
 
   const structureImages = [

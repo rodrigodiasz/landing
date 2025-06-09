@@ -36,8 +36,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useRef, useCallback, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { useEffect, useCallback, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 // Hero carousel hook
@@ -53,34 +52,6 @@ const useHeroCarousel = (images: any[], interval = 5000) => {
   }, [interval, images.length]);
 
   return { currentIndex, setCurrentIndex };
-};
-
-// Auto-scroll carousel hook
-const useAutoScroll = (interval = 3000) => {
-  const [ref, inView] = useInView({
-    threshold: 0,
-    triggerOnce: false,
-  });
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!inView) return;
-
-    const scrollInterval = setInterval(() => {
-      if (carouselRef.current) {
-        const nextButton = carouselRef.current.querySelector(
-          '[data-orientation="next"]'
-        ) as HTMLButtonElement;
-        if (nextButton) {
-          nextButton.click();
-        }
-      }
-    }, interval);
-
-    return () => clearInterval(scrollInterval);
-  }, [inView, interval]);
-
-  return { ref, carouselRef };
 };
 
 // Smooth scroll hook
